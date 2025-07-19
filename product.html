@@ -38,149 +38,215 @@
                 <h2> Handmade Categories</h2>
 
                 <!-- Filter Buttons -->
-                <div style="background-color: white; padding: 40px 20px; border-radius: 10px; margin: 30px auto; max-width: 900px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <h2 style="font-size: 32px; margin-bottom: 30px;">🔍 Search Handmade Products</h2>
-    
-    <div class="search-bar" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-        <input 
-            type="text" 
-            id="searchInput" 
-            placeholder="Enter product name..." 
-            style="padding: 18px 20px; font-size: 18px; width: 60%; min-width: 250px; border: 1px solid #ccc; border-radius: 8px;"
-        >
-        <button 
-            onclick="searchProduct()" 
-            style="padding: 18px 30px; font-size: 18px; background-color:grey; color: white; border: none; border-radius: 8px; cursor: pointer;"
-        >
-            🔍 Search
-        </button>
-    </div>
-</div>
+                <div
+                    style="background-color: white; padding: 40px 20px; border-radius: 10px; margin: 30px auto; max-width: 900px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                    <h2 style="font-size: 32px; margin-bottom: 30px;">🔍 Search Handmade Products</h2>
 
-</div>
-
-
-                <!-- Product Cards -->
-                <div class="products-container">
-                    <!-- Jewelry Product -->
-                    <div class="product-card" data-category="jewelry">
-                        <img src="images/neclace.jpg" alt="Necklace">
-                        <h3>Kasumi Pearl Necklace</h3>
-                        <p>900 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="jewelry">
-                        <img src="images/neclace2.jpg" alt="Necklace">
-                        <h3> Starburst pendant</h3>
-                        <p>1350 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="jewelry">
-                        <img src="images/neclace3.jpg" alt="Necklace">
-                        <h3>White pearl Necklace</h3>
-                        <p>1200 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="jewelry">
-                        <img src="images/earring.jpg" alt="Earrings">
-                        <h3>Earring (polimar clay) </h3>
-                        <p>800 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="jewelry">
-                        <img src="images/earring2.jpg" alt="Earrings">
-                        <h3>Earring(polimar clay) </h3>
-                        <p>800 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="jewelry">
-                        <img src="images/earring3.jpg" alt="Earrings">
-                        <h3>handmade heart-shaped earrings </h3>
-                        <p>1800 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="jewelry">
-                        <img src="images/earring4.jpg" alt="Earrings">
-                        <h3>Earring (featuring carved wood beads, green crystals, and a faux pearl) </h3>
-                        <p>1500 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-
-
-
-                    <!-- Decor Product -->
-                    <div class="product-card" data-category="decor">
-                        <img src="images/candle.jpg" alt="Candle">
-                        <h3>Decorative Candle</h3>
-                        <p>500 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="decor">
-                        <img src="images/candle2.jpg" alt="Candle">
-                        <h3>Decorative Candle</h3>
-                        <p>700 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="decor">
-                        <img src="images/candle3.jpg" alt="Candle">
-                        <h3>Decorative Candle</h3>
-                        <p>400 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="decor">
-                        <img src="images/candle4.jpg" alt="Candle">
-                        <h3>Decorative Candle</h3>
-                        <p>850 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="decor">
-                        <img src="images/candle5.jpg" alt="Candle">
-                        <h3>Decorative Candle</h3>
-                        <p>900 tk </p>
-                        <button>Add to Cart</button>
-                    </div>
-
-                    <!-- Clothing Product -->
-                    <div class="product-card" data-category="clothing">
-                        <img src="images/wool 1.jpg" alt="Shirt">
-                        <h3>woolen sweater</h3>
-                        <p>700 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                     <div class="product-card" data-category="clothing">
-                        <img src="images/wool2.jpg" alt="Shirt">
-                        <h3>woolen sweater</h3>
-                        <p>750 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                     <div class="product-card" data-category="clothing">
-                        <img src="images/wool3.jpg" alt="Shirt">
-                        <h3>woolen sweater</h3>
-                        <p>900 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                    
-                    
-
-
-                    <!-- Bags Product -->
-                    <div class="product-card" data-category="Bags">
-                        <img src="images/bag1.jpg" alt="Toe">
-                        <h3>Handmade toe bags</h3>
-                        <p>400 tk</p>
-                        <button>Add to Cart</button>
-                    </div>
-                    <div class="product-card" data-category="Bags">
-                        <img src="images/bag 2.jpg" alt="Toe">
-                        <h3>Handmade toe bags</h3>
-                        <p>550 tk</p>
-                        <button>Add to Cart</button>
+                    <div class="search-bar" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                        <input type="text" id="searchInput" placeholder="Enter product name..."
+                            style="padding: 18px 20px; font-size: 18px; width: 60%; min-width: 250px; border: 1px solid #ccc; border-radius: 8px;">
+                        <button onclick="searchProduct()"
+                            style="padding: 18px 30px; font-size: 18px; background-color:grey; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            🔍 Search
+                        </button>
                     </div>
                 </div>
-                 
-                
 
-            
+            </div>
+
+
+            <!-- Product Cards -->
+            <div class="products-container">
+                <!-- Jewelry Product -->
+                <div class="product-card" data-category="jewelry">
+                    <img src="images/neclace.jpg" alt="Necklace">
+                    <h3>Kasumi Pearl Necklace</h3>
+                    <p>900 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Kasumi Pearl Necklace">
+                        <input type="hidden" name="product_price" value="900">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+
+                </div>
+                <div class="product-card" data-category="jewelry">
+                    <img src="images/neclace2.jpg" alt="Necklace">
+                    <h3> Starburst pendant</h3>
+                    <p>1350 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Starburst pendant">
+                        <input type="hidden" name="product_price" value="1350">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+
+                </div>
+                <div class="product-card" data-category="jewelry">
+                    <img src="images/neclace3.jpg" alt="Necklace">
+                    <h3>White pearl Necklace</h3>
+                    <p>1200 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="White Pearl Necklace">
+                        <input type="hidden" name="product_price" value="1200">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+
+                </div>
+                <div class="product-card" data-category="jewelry">
+                    <img src="images/earring.jpg" alt="Earrings">
+                    <h3>Earring (polimar clay) </h3>
+                    <p>800 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Earring (polimar clay)">
+                        <input type="hidden" name="product_price" value="800">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="jewelry">
+                    <img src="images/earring2.jpg" alt="Earrings">
+                    <h3>Earring(polimar clay) </h3>
+                    <p>800 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Earring (polimar clay)">
+                        <input type="hidden" name="product_price" value="800">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="jewelry">
+                    <img src="images/earring3.jpg" alt="Earrings">
+                    <h3>handmade heart-shaped earrings </h3>
+                    <p>1800 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="handmade heart-shaped earrings">
+                        <input type="hidden" name="product_price" value="1800">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="jewelry">
+                    <img src="images/earring4.jpg" alt="Earrings">
+                    <h3>Earring (featuring carved wood beads) </h3>
+                    <p>1500 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Earring (featuring carved wood beads)">
+                        <input type="hidden" name="product_price" value="1500">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+
+
+
+                <!-- Decor Product -->
+                <div class="product-card" data-category="decor">
+                    <img src="images/candle.jpg" alt="Candle">
+                    <h3>Decorative Candle</h3>
+                    <p>500 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Decorative Candle">
+                        <input type="hidden" name="product_price" value="500">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="decor">
+                    <img src="images/candle2.jpg" alt="Candle">
+                    <h3>Decorative Candle</h3>
+                    <p>700 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Decorative Candle">
+                        <input type="hidden" name="product_price" value="700">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="decor">
+                    <img src="images/candle3.jpg" alt="Candle">
+                    <h3>Decorative Candle</h3>
+                    <p>400 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Decorative Candle">
+                        <input type="hidden" name="product_price" value="400">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="decor">
+                    <img src="images/candle4.jpg" alt="Candle">
+                    <h3>Decorative Candle</h3>
+                    <p>850 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Decorative Candle">
+                        <input type="hidden" name="product_price" value="850">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="decor">
+                    <img src="images/candle5.jpg" alt="Candle">
+                    <h3>Decorative Candle</h3>
+                    <p>900 tk </p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Decorative Candle">
+                        <input type="hidden" name="product_price" value="900">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+
+                <!-- Clothing Product -->
+                <div class="product-card" data-category="clothing">
+                    <img src="images/wool 1.jpg" alt="Shirt">
+                    <h3>woolen sweater</h3>
+                    <p>700 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="woolen sweater">
+                        <input type="hidden" name="product_price" value="700">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="clothing">
+                    <img src="images/wool2.jpg" alt="Shirt">
+                    <h3>woolen sweater</h3>
+                    <p>750 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="woolen sweater">
+                        <input type="hidden" name="product_price" value="750">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="clothing">
+                    <img src="images/wool3.jpg" alt="Shirt">
+                    <h3>woolen sweater</h3>
+                    <p>900 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="woolen sweater">
+                        <input type="hidden" name="product_price" value="900">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+
+
+
+
+                <!-- Bags Product -->
+                <div class="product-card" data-category="Bags">
+                    <img src="images/bag1.jpg" alt="Toe">
+                    <h3>Handmade toe bag</h3>
+                    <p>400 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Handmade toe bag">
+                        <input type="hidden" name="product_price" value="400">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+                <div class="product-card" data-category="Bags">
+                    <img src="images/bag 2.jpg" alt="Toe">
+                    <h3>Handmade toe bags</h3>
+                    <p>550 tk</p>
+                    <form method="POST" action="product.php">
+                        <input type="hidden" name="product_name" value="Handmade toe bag">
+                        <input type="hidden" name="product_price" value="400">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+
         </main>
     </body>
 
