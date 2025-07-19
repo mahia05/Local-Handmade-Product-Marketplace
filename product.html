@@ -38,14 +38,27 @@
                 <h2> Handmade Categories</h2>
 
                 <!-- Filter Buttons -->
-                <div class="category-buttons">
-                    <button onclick="filterCategory('all')">All</button>
-                    <button onclick="filterCategory('jewelry')">Jewelry</button>
-                    <button onclick="filterCategory('decor')">Decor</button>
-                    <button onclick="filterCategory('clothing')">Clothing</button>
-                    <button onclick="filterCategory('clothing')">Bags</button>
+                <div style="background-color: white; padding: 40px 20px; border-radius: 10px; margin: 30px auto; max-width: 900px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="font-size: 32px; margin-bottom: 30px;">🔍 Search Handmade Products</h2>
+    
+    <div class="search-bar" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Enter product name..." 
+            style="padding: 18px 20px; font-size: 18px; width: 60%; min-width: 250px; border: 1px solid #ccc; border-radius: 8px;"
+        >
+        <button 
+            onclick="searchProduct()" 
+            style="padding: 18px 30px; font-size: 18px; background-color:grey; color: white; border: none; border-radius: 8px; cursor: pointer;"
+        >
+            🔍 Search
+        </button>
+    </div>
+</div>
 
-                </div>
+</div>
+
 
                 <!-- Product Cards -->
                 <div class="products-container">
@@ -134,18 +147,40 @@
                         <p>700 tk</p>
                         <button>Add to Cart</button>
                     </div>
+                     <div class="product-card" data-category="clothing">
+                        <img src="images/wool2.jpg" alt="Shirt">
+                        <h3>woolen sweater</h3>
+                        <p>750 tk</p>
+                        <button>Add to Cart</button>
+                    </div>
+                     <div class="product-card" data-category="clothing">
+                        <img src="images/wool3.jpg" alt="Shirt">
+                        <h3>woolen sweater</h3>
+                        <p>900 tk</p>
+                        <button>Add to Cart</button>
+                    </div>
+                    
+                    
+
 
                     <!-- Bags Product -->
                     <div class="product-card" data-category="Bags">
-                        <img src="" alt="Toe">
+                        <img src="images/bag1.jpg" alt="Toe">
                         <h3>Handmade toe bags</h3>
-                        <p>$15</p>
+                        <p>400 tk</p>
+                        <button>Add to Cart</button>
+                    </div>
+                    <div class="product-card" data-category="Bags">
+                        <img src="images/bag 2.jpg" alt="Toe">
+                        <h3>Handmade toe bags</h3>
+                        <p>550 tk</p>
                         <button>Add to Cart</button>
                     </div>
                 </div>
+                 
+                
 
-
-            </div>
+            
         </main>
     </body>
 
