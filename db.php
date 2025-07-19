@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "handmade_marketplace";
+$db = "local_handmade_product_marketplace";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
