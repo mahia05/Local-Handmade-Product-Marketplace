@@ -1,14 +1,12 @@
 <?php
 session_start();
 
-if (isset($_POST['product_id']) && isset($_SESSION['cart'])) {
-    $id = $_POST['product_id'];
-    $index = array_search($id, $_SESSION['cart']);
-    if ($index !== false) {
-        unset($_SESSION['cart'][$index]);
-        $_SESSION['cart'] = array_values($_SESSION['cart']); // reset keys
+if (isset($_POST['product_id'])) {
+    $product_id = intval($_POST['product_id']);
+    if (isset($_SESSION['cart'][$product_id])) {
+        unset($_SESSION['cart'][$product_id]);
     }
 }
 
-header("Location: cart.php");
+header('Location: cart.php');
 exit();

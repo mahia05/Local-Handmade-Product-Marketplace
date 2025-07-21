@@ -1,26 +1,44 @@
 <?php
 session_start();
-include 'db.php';
+include 'db.php'; // Make sure this connects to your DB
 
-if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-    echo "Your cart is empty.";
+echo "<h2>Your Cart</h2>";
+
+if (empty($_SESSION['cart'])) {
+    echo "<p>Your cart is empty.</p>";
 } else {
-    foreach ($_SESSION['cart'] as $product_id) {
-        $sql = "SELECT * FROM products WHERE id = $product_id";
-        $result = $conn->query($sql);
+    $ids = array_keys($_SESSION['cart']); // get all product_ids from session
 
-        if ($result && $result->num_rows > 0) {
-            $product = $result->fetch_assoc();
+    // Create an SQL-friendly string like (1, 2, 5)
+    $id_string = implode(',', array_map('intval', $ids));
 
-            echo "<div style='border: 1px solid #ccc; padding: 10px; margin: 10px 0;'>
-                    <h4>{$product['name']}</h4>
-                    <p>{$product['price']} tk</p>
-                    
-                    <form method='POST' action='delete_from_cart.php' style='display:inline;'>
-                        <input type='hidden' name='product_id' value='{$product_id}'>
-                        <button type='submit'>Remove</button>
-                    </form>
-                  </div>";
+    // Fetch product details
+    $sql = "SELECT * FROM products WHERE id IN ($id_string)";
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $id = $row['id'];
+            $name = $row['name'];
+            $price = $row['price'];
+            $img = $row['image']; // assuming this is image path
+            $quantity = $_SESSION['cart'][$id];
+            $total = $price * $quantity;
+
+            echo "
+            <div class='product-card'>
+                <img src='images/$img' width='100'>
+                <h3>$name</h3>
+                <p>Price: $price tk</p>
+                <p>Quantity: $quantity</p>
+                <p>Total: $total tk</p>
+                <form method='POST' action='delete_from_cart.php'>
+                    <input type='hidden' name='product_id' value='$id'>
+                    <button type='submit'>Remove</button>
+                </form>
+            </div><hr>";
         }
+    } else {
+        echo "<p>No products found.</p>";
     }
 }
