@@ -17,15 +17,34 @@
         <a href="login.html">Login</a>
     </nav>
     <script>
-        function filterCategory(category) {
+        // function filterCategory(category) {
+        //     const cards = document.querySelectorAll('.product-card');
+        //     cards.forEach(card => {
+        //         if (category === 'all' || card.dataset.category === category) {
+        //             card.style.display = 'block';
+        //         } else {
+        //             card.style.display = 'none';
+        //         }
+        //     });
+        // }
+        function searchProduct() {
+            const input = document.getElementById("searchInput").value.toLowerCase().trim();
             const cards = document.querySelectorAll('.product-card');
+            let anyMatch = false;
+
             cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
+                const name = card.querySelector('h3').textContent.toLowerCase();
+                if (name.includes(input)) {
+                    card.style.display = "block";
+                    anyMatch = true;
                 } else {
-                    card.style.display = 'none';
+                    card.style.display = "none";
                 }
             });
+
+            if (!anyMatch && input !== "") {
+                alert("No products found for: " + input);
+            }
         }
     </script>
 
@@ -42,13 +61,16 @@
                     style="background-color: white; padding: 40px 20px; border-radius: 10px; margin: 30px auto; max-width: 900px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
                     <h2 style="font-size: 32px; margin-bottom: 30px;">🔍 Search Handmade Products</h2>
 
-                    <div class="search-bar" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                    <div class="search-bar"
+                        style="display: flex; justify-content: center; flex-wrap: wrap; align-items: center;">
+                        <p>Test logo</p>
                         <input type="text" id="searchInput" placeholder="Enter product name..."
                             style="padding: 18px 20px; font-size: 18px; width: 60%; min-width: 250px; border: 1px solid #ccc; border-radius: 8px;">
                         <button onclick="searchProduct()"
                             style="padding: 18px 30px; font-size: 18px; background-color:grey; color: white; border: none; border-radius: 8px; cursor: pointer;">
                             🔍 Search
                         </button>
+                        <a href="cart.php"><img src="./images/cart.png" alt=""></a>
                     </div>
                 </div>
 
@@ -62,7 +84,7 @@
                     <img src="images/neclace.jpg" alt="Necklace">
                     <h3>Kasumi Pearl Necklace</h3>
                     <p>900 tk </p>
-                    <form method="POST" action="product.php">
+                    <form method="POST" action="add_to_cart.php">
                         <input type="hidden" name="product_name" value="Kasumi Pearl Necklace">
                         <input type="hidden" name="product_price" value="900">
                         <button type="submit">Add to Cart</button>

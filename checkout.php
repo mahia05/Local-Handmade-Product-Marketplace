@@ -1,23 +1,52 @@
 <?php
 session_start();
-include 'db.php';
+?>
 
-if (!isset($_SESSION['email'])) {
-    echo "Please log in first.";
-    exit();
-}
+<!DOCTYPE html>
+<html lang="en">
 
-$email = $_SESSION['email'];
-$userResult = $conn->query("SELECT id FROM users WHERE email='$email'");
-$user = $userResult->fetch_assoc();
-$user_id = $user['id'];
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
-    echo "Your cart is empty.";
-} else {
-    foreach ($_SESSION['cart'] as $product_id) {
-        $conn->query("INSERT INTO orders (user_id, product_id, quantity) VALUES ($user_id, $product_id, 1)");
-    }
-    $_SESSION['cart'] = []; // clear cart after order
-    echo "Order placed successfully!";
-}
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="product.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="login.html">Login</a>
+    </nav>
+
+    <main>
+        <h2>Checkout</h2>
+
+        <?php
+        if (isset($_GET['success']) && $_GET['success'] == 1) {
+            echo "<p style='color:green;'>✅ Order placed successfully!</p>";
+        }
+        ?>
+
+        <form action="process_order.php" method="POST">
+            <label>Full Name:</label><br>
+            <input type="text" name="fullname" required><br>
+
+            <label>Address:</label><br>
+            <textarea name="address" required></textarea><br>
+
+            <label>Payment Method:</label><br>
+            <select name="payment">
+                <option value="cash">Cash on Delivery</option>
+                <option value="bkash">bKash</option>
+            </select><br><br>
+
+            <input type="submit" value="Place Order">
+        </form>
+    </main>
+
+</body>
+
+</html>

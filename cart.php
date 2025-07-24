@@ -2,17 +2,18 @@
 session_start();
 include 'db.php';
 
-
 // Handle remove from cart
 if (isset($_GET['remove'])) {
-    $remove_id = $_GET['remove'];
-    unset($_SESSION['cart'][$remove_id]);
+    $remove_id = intval($_GET['remove']);
+    if (isset($_SESSION['cart'][$remove_id])) {
+        unset($_SESSION['cart'][$remove_id]);
+    }
 }
 
 // Handle quantity update
 if (isset($_POST['update_qty'])) {
-    $product_id = $_POST['product_id'];
-    $quantity = $_POST['quantity'];
+    $product_id = intval($_POST['product_id']);
+    $quantity = intval($_POST['quantity']);
     if ($quantity > 0) {
         $_SESSION['cart'][$product_id] = $quantity;
     }
@@ -20,9 +21,10 @@ if (isset($_POST['update_qty'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
     <title>Your Cart</title>
     <style>
         body {
@@ -77,12 +79,16 @@ if (isset($_POST['update_qty'])) {
             margin-top: 10px;
             text-decoration: none;
         }
+
+        h3.total {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
 
-    <h2 style="text-align:center;">🛒Your Cart</h2>
+    <h2 style="text-align:center;">🛒 Your Cart</h2>
 
     <div class="cart-container">
         <?php
@@ -90,37 +96,44 @@ if (isset($_POST['update_qty'])) {
 
         if (!empty($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                // Protect against SQL Injection by casting $product_id to int
+                $product_id = intval($product_id);
                 $sql = "SELECT * FROM products WHERE id = $product_id";
                 $result = $conn->query($sql);
 
                 if ($result && $result->num_rows > 0) {
                     $row = $result->fetch_assoc();
                     $name = htmlspecialchars($row['name']);
-                    $price = $row['price'];
+                    $price = floatval($row['price']);
                     $image = htmlspecialchars($row['image']);
                     $subtotal = $price * $quantity;
                     $total += $subtotal;
 
                     echo "
-            <div class='cart-item'>
-                <img src='images/$image' alt='$name'>
-                <h4>$name</h4>
-                <p>Price: $price tk</p>
-                <form method='POST'>
-                    <input type='hidden' name='product_id' value='$product_id'>
-                    <input type='number' name='quantity' value='$quantity' min='1'>
-                    <button type='submit' name='update_qty'>Update</button>
-                </form>
-                <p>Subtotal: $subtotal tk</p>
-                <a href='cart.php?remove=$product_id' class='remove-link'>Remove</a>
-            </div>";
+                    <div class='cart-item'>
+                        <img src='images/$image' alt='$name'>
+                        <h4>$name</h4>
+                        <p>Price: $price tk</p>
+                        <form method='POST'>
+                            <input type='hidden' name='product_id' value='$product_id'>
+                            <input type='number' name='quantity' value='$quantity' min='1'>
+                            <button type='submit' name='update_qty'>Update</button>
+                        </form>
+                        <p>Subtotal: $subtotal tk</p>
+                        <a href='cart.php?remove=$product_id' class='remove-link'>Remove</a>
+                    </div>";
                 }
             }
-            echo "<h3 style='text-align:center;'>Total: $total tk</h3>";
+            echo "<h3 class='total'>Total: $total tk</h3>";
         } else {
             echo "<p style='text-align:center;'>Your cart is empty.</p>";
         }
         ?>
+    </div>
+
+    <div style="text-align:center; margin-top: 20px;">
+        <a href="product.php">Continue Shopping</a> |
+        <a href="checkout.php">Proceed to Checkout</a>
     </div>
 
 </body>

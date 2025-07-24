@@ -2,29 +2,69 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Page Title</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8" />
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
-<body>
+        .cart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="product.html">Products</a>
-        <a href="cart.html">Cart</a>
-        <a href="signup.html">Sign Up</a>
-        <a href="login.html">Login</a>
-    </nav>
+        .cart-item {
+            width: 280px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+        }
 
-    <body>
-        <main>
-            <h2>Your Cart</h2>
-            <div id="cart-items">
-                <!-- JavaScript will show items from localStorage -->
-            </div>
-            <a href="checkout.html"><button>Checkout</button></a>
-        </main>
-    </body>
+        .cart-item img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
 
-</html>
+        .cart-item h4 {
+            margin: 10px 0 5px;
+        }
+
+        .cart-item input[type="number"] {
+            width: 50px;
+            padding: 4px;
+        }
+
+        .cart-item button {
+            padding: 5px 10px;
+            margin-left: 5px;
+        }
+
+        .remove-link {
+            display: block;
+            color: red;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        h3.total {
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: blue;
+        }
+
+        nav {
+            margin-bottom: 20px;
+            text-align: center;
+        }
