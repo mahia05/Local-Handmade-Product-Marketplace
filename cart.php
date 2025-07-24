@@ -1,44 +1,128 @@
 <?php
 session_start();
-include 'db.php'; // Make sure this connects to your DB
+include 'db.php';
 
-echo "<h2>Your Cart</h2>";
 
-if (empty($_SESSION['cart'])) {
-    echo "<p>Your cart is empty.</p>";
-} else {
-    $ids = array_keys($_SESSION['cart']); // get all product_ids from session
+// Handle remove from cart
+if (isset($_GET['remove'])) {
+    $remove_id = $_GET['remove'];
+    unset($_SESSION['cart'][$remove_id]);
+}
 
-    // Create an SQL-friendly string like (1, 2, 5)
-    $id_string = implode(',', array_map('intval', $ids));
-
-    // Fetch product details
-    $sql = "SELECT * FROM products WHERE id IN ($id_string)";
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $id = $row['id'];
-            $name = $row['name'];
-            $price = $row['price'];
-            $img = $row['image']; // assuming this is image path
-            $quantity = $_SESSION['cart'][$id];
-            $total = $price * $quantity;
-
-            echo "
-            <div class='product-card'>
-                <img src='images/$img' width='100'>
-                <h3>$name</h3>
-                <p>Price: $price tk</p>
-                <p>Quantity: $quantity</p>
-                <p>Total: $total tk</p>
-                <form method='POST' action='delete_from_cart.php'>
-                    <input type='hidden' name='product_id' value='$id'>
-                    <button type='submit'>Remove</button>
-                </form>
-            </div><hr>";
-        }
-    } else {
-        echo "<p>No products found.</p>";
+// Handle quantity update
+if (isset($_POST['update_qty'])) {
+    $product_id = $_POST['product_id'];
+    $quantity = $_POST['quantity'];
+    if ($quantity > 0) {
+        $_SESSION['cart'][$product_id] = $quantity;
     }
 }
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .cart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .cart-item {
+            width: 280px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .cart-item img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .cart-item h4 {
+            margin: 10px 0 5px;
+        }
+
+        .cart-item form {
+            margin: 10px 0;
+        }
+
+        .cart-item input[type="number"] {
+            width: 50px;
+            padding: 4px;
+        }
+
+        .cart-item button {
+            padding: 5px 10px;
+            margin-left: 5px;
+        }
+
+        .remove-link {
+            display: block;
+            color: red;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="text-align:center;">🛒Your Cart</h2>
+
+    <div class="cart-container">
+        <?php
+        $total = 0;
+
+        if (!empty($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                $sql = "SELECT * FROM products WHERE id = $product_id";
+                $result = $conn->query($sql);
+
+                if ($result && $result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $name = htmlspecialchars($row['name']);
+                    $price = $row['price'];
+                    $image = htmlspecialchars($row['image']);
+                    $subtotal = $price * $quantity;
+                    $total += $subtotal;
+
+                    echo "
+            <div class='cart-item'>
+                <img src='images/$image' alt='$name'>
+                <h4>$name</h4>
+                <p>Price: $price tk</p>
+                <form method='POST'>
+                    <input type='hidden' name='product_id' value='$product_id'>
+                    <input type='number' name='quantity' value='$quantity' min='1'>
+                    <button type='submit' name='update_qty'>Update</button>
+                </form>
+                <p>Subtotal: $subtotal tk</p>
+                <a href='cart.php?remove=$product_id' class='remove-link'>Remove</a>
+            </div>";
+                }
+            }
+            echo "<h3 style='text-align:center;'>Total: $total tk</h3>";
+        } else {
+            echo "<p style='text-align:center;'>Your cart is empty.</p>";
+        }
+        ?>
+    </div>
+
+</body>
+
+</html>
