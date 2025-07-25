@@ -1,6 +1,8 @@
 <?php
 session_start();
 include 'db.php';
+include 'header.php';
+
 
 // Handle remove from cart
 if (isset($_GET['remove'])) {

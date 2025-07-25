@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'db.php';
+include 'header.php';
 
 if (!isset($_SESSION['email'])) {
     echo "Please log in to view your order history.";

@@ -37,7 +37,6 @@
 <div class="profile-container">
     <div class="profile-icon" onclick="toggleDropdown()">👤</div>
     <div id="dropdown" class="dropdown-content">
-        <a href="profile.php">My Profile</a>
         <a href="order_history.php">History</a>
         <a href="logout.php">Logout</a>
     </div>
