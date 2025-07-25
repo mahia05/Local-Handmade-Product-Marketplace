@@ -2,6 +2,7 @@
 session_start();
 include 'db.php';
 
+
 $step = isset($_GET['step']) ? $_GET['step'] : 'signup';
 $error = '';
 $success = '';

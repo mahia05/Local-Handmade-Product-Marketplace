@@ -47,6 +47,76 @@
             }
         }
     </script>
+    <!-- 🔹 Popup Container -->
+    <div id="popup-container"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); z-index: 1000;">
+        <div
+            style="background: #fff; width: 350px; margin: 100px auto; padding: 20px; border-radius: 8px; position: relative;">
+            <span onclick="closePopup()"
+                style="position: absolute; top: 10px; right: 15px; cursor: pointer; font-weight: bold;">✖</span>
+
+            <!-- Signup Form -->
+            <div id="signup-form">
+                <h3>Sign Up</h3>
+                <form id="signupForm">
+                    <input type="text" name="fullname" placeholder="Full Name" required><br><br>
+                    <input type="email" name="email" placeholder="Email" required><br><br>
+                    <input type="password" name="password" placeholder="Password" required><br><br>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" style="display: none;">
+                <h3>Login</h3>
+                <form id="loginForm">
+                    <input type="email" name="email" placeholder="Email" required><br><br>
+                    <input type="password" name="password" placeholder="Password" required><br><br>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById("popup-container").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popup-container").style.display = "none";
+        }
+
+        // Signup submit handler
+        document.getElementById("signupForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch("signup.php", {
+                method: "POST",
+                body: formData
+            }).then(res => res.text()).then(response => {
+                alert("Signup successful! Now login.");
+                document.getElementById("signup-form").style.display = "none";
+                document.getElementById("login-form").style.display = "block";
+            });
+        });
+
+        // Login submit handler
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch("login.php", {
+                method: "POST",
+                body: formData
+            }).then(res => res.text()).then(response => {
+                alert("Login successful!");
+                closePopup();
+                window.location.reload();
+            });
+        });
+    </script>
 
 
     <body>
@@ -87,7 +157,7 @@
                     <form method="POST" action="add_to_cart.php">
                         <input type="hidden" name="product_name" value="Kasumi Pearl Necklace">
                         <input type="hidden" name="product_price" value="900">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="4">Add to Cart</button>
                     </form>
 
                 </div>
@@ -98,7 +168,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Starburst pendant">
                         <input type="hidden" name="product_price" value="1350">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="5">Add to Cart</button>
                     </form>
 
                 </div>
@@ -109,7 +179,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="White Pearl Necklace">
                         <input type="hidden" name="product_price" value="1200">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="6">Add to Cart</button>
                     </form>
 
                 </div>
@@ -120,7 +190,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Earring (polimar clay)">
                         <input type="hidden" name="product_price" value="800">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="7">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="jewelry">
@@ -130,7 +200,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Earring (polimar clay)">
                         <input type="hidden" name="product_price" value="800">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="8">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="jewelry">
@@ -140,7 +210,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="handmade heart-shaped earrings">
                         <input type="hidden" name="product_price" value="1800">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="9">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="jewelry">
@@ -150,7 +220,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Earring (featuring carved wood beads)">
                         <input type="hidden" name="product_price" value="1500">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="10">Add to Cart</button>
                     </form>
                 </div>
 
@@ -164,7 +234,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Decorative Candle">
                         <input type="hidden" name="product_price" value="500">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="11">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="decor">
@@ -174,7 +244,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Decorative Candle">
                         <input type="hidden" name="product_price" value="700">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="12">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="decor">
@@ -184,7 +254,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Decorative Candle">
                         <input type="hidden" name="product_price" value="400">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="13">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="decor">
@@ -194,7 +264,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Decorative Candle">
                         <input type="hidden" name="product_price" value="850">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="14">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="decor">
@@ -204,7 +274,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Decorative Candle">
                         <input type="hidden" name="product_price" value="900">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="15">Add to Cart</button>
                     </form>
                 </div>
 
@@ -216,7 +286,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="woolen sweater">
                         <input type="hidden" name="product_price" value="700">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="16">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="clothing">
@@ -226,7 +296,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="woolen sweater">
                         <input type="hidden" name="product_price" value="750">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="17">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="clothing">
@@ -236,7 +306,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="woolen sweater">
                         <input type="hidden" name="product_price" value="900">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="18">Add to Cart</button>
                     </form>
                 </div>
 
@@ -251,7 +321,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Handmade toe bag">
                         <input type="hidden" name="product_price" value="400">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="19">Add to Cart</button>
                     </form>
                 </div>
                 <div class="product-card" data-category="Bags">
@@ -261,7 +331,7 @@
                     <form method="POST" action="product.php">
                         <input type="hidden" name="product_name" value="Handmade toe bag">
                         <input type="hidden" name="product_price" value="400">
-                        <button type="submit">Add to Cart</button>
+                        <button type="button" onclick="handleAddToCart(this)" data-id="20">Add to Cart</button>
                     </form>
                 </div>
             </div>
@@ -270,6 +340,82 @@
 
 
         </main>
+        <script>
+            function handleAddToCart(buttonElement) {
+                const productId =
+                    buttonElement.getAttribute('data-id');
+
+                fetch("check_login_status.php")
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.loggedIn) {
+                            // If logged in, add to cart directly
+                            const form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = "add_to_cart.php";
+
+                            const input = document.createElement("input");
+                            input.type = "hidden";
+                            input.name = "product_id";
+                            input.value = productId;
+
+                            form.appendChild(input);
+                            document.body.appendChild(form);
+                            form.submit();
+                        } else {
+                            // Not logged in - show popup
+                            sessionStorage.setItem("pendingProduct", productId);
+                            showPopup();
+                        }
+                    });
+            }
+        </script>
+
+        <script>
+            document.getElementById("loginForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+
+                fetch("login.php", {
+                    method: "POST",
+                    body: formData
+                }).then(res => res.text()).then(response => {
+                    alert("Login successful!");
+                    closePopup();
+
+                    const pendingId = sessionStorage.getItem("pendingProduct");
+                    if (pendingId) {
+                        sessionStorage.setItem("afterLoginAddToCart", pendingId);
+                    }
+
+                    // ✅ Instead of reload, go to product.html directly
+                    window.location.href = "product.php";
+                });
+            });
+        </script>
+
+        <script>
+            window.addEventListener("load", function () {
+                const pendingId = sessionStorage.getItem("afterLoginAddToCart");
+                if (pendingId) {
+                    const form = document.createElement("form");
+                    form.method = "POST";
+                    form.action = "add_to_cart.php";
+
+                    const input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "product_id";
+                    input.value = pendingId;
+
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+
+                    sessionStorage.removeItem("afterLoginAddToCart");
+                }
+            });
+        </script>
+
     </body>
 
 </html>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'header.php';
 
 if (!isset($_SESSION['email'])) {
     // User not logged in, store pending product ID (from POST or GET)
