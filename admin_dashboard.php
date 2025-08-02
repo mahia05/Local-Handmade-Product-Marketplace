@@ -48,7 +48,7 @@ if (!isset($_SESSION['admin'])) {
 
     <div class="nav">
         <a href="admin_add_product.php">➕ Add Product</a>
-        <a href="manage_products.php">🛠️ Manage Products</a>
+        <a href="manage_product.php">🛠️ Manage Products</a>
         <a href="products.php" target="_blank">🔍 View All Products</a>
         <a href="admin_logout.php" style="float: right; background-color: #cc0000;">🚪 Logout</a>
     </div>
