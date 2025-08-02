@@ -17,7 +17,9 @@
         <input type="email" name="email" required /><br />
 
         <label>Password:</label><br />
-        <input type="password" name="password" required /><br /><br />
+        <input type="password" name="password" required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}"
+            title="Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character." />
+
 
         <button type="submit">Sign Up</button>
     </form>

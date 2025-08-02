@@ -51,8 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
             $_SESSION['email'] = $email;
             $success = "✅ Login successful!";
 
-            // Redirect back to add_to_cart.php to finish cart addition
-            header("Location: add_to_cart.php");
+            // ✅ Redirect back to add_to_cart.php with product_id if it was saved
+            $product_redirect = isset($_SESSION['pending_product_id']) ? '?product_id=' . $_SESSION['pending_product_id'] : '';
+            header("Location: add_to_cart.php" . $product_redirect);
             exit();
         } else {
             $error = "❌ Invalid password.";
@@ -71,53 +72,88 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
     <style>
         body {
             font-family: Arial;
-            background-color: #f4f4f4;
+            background-color: #eef2f3;
             padding: 20px;
         }
 
         .container {
             max-width: 400px;
             margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgb(11, 70, 70);
+        }
+
+        h2 {
+            text-align: center;
+            color: rgb(11, 70, 70);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
         }
 
         input[type="email"],
         input[type="password"] {
             width: 100%;
             padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
         }
 
         .btn {
-            background: #007BFF;
+            background: rgb(11, 70, 70);
             color: white;
-            padding: 10px 15px;
+            padding: 10px;
             border: none;
             width: 100%;
             cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
         }
 
         .btn:hover {
-            background: #0056b3;
+            background: #0b5252;
         }
 
         .msg {
             margin-top: 10px;
             color: green;
+            text-align: center;
+            font-weight: bold;
         }
 
         .error {
             margin-top: 10px;
             color: red;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        a {
+            color: rgb(11, 70, 70);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -143,7 +179,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 </div>
                 <div class="form-group">
                     <label>Password:</label>
-                    <input type="password" name="password" required />
+                    <input type="password" name="password" required
+                        pattern="(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}"
+                        title="Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character." />
+
                 </div>
                 <button type="submit" name="signup" class="btn">Sign Up</button>
             </form>
@@ -156,7 +195,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                 </div>
                 <div class="form-group">
                     <label>Password:</label>
-                    <input type="password" name="password" required />
+                    <input type="password" name="password" required
+                        pattern="(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}"
+                        title="Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character." />
+
                 </div>
                 <button type="submit" name="login" class="btn">Login</button>
             </form>

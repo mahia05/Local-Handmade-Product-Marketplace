@@ -15,7 +15,7 @@ session_start();
 
     <nav>
         <a href="index.html">Home</a>
-        <a href="product.html">Products</a>
+        <a href="products.php">Products</a>
         <a href="cart.html">Cart</a>
         <a href="signup.html">Sign Up</a>
         <a href="login.html">Login</a>

@@ -134,7 +134,7 @@ if (isset($_POST['update_qty'])) {
     </div>
 
     <div style="text-align:center; margin-top: 20px;">
-        <a href="product.php">Continue Shopping</a> |
+        <a href="products.php">Continue Shopping</a> |
         <a href="checkout.php">Proceed to Checkout</a>
     </div>
 
