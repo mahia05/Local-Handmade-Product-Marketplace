@@ -2,6 +2,16 @@
 // products.php
 session_start();
 include 'db.php';
+
+// Search filter
+$search = '';
+if (isset($_GET['search'])) {
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
+    $sql = "SELECT * FROM products WHERE name LIKE '%$search%'";
+} else {
+    $sql = "SELECT * FROM products";
+}
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -95,6 +105,7 @@ include 'db.php';
 
         h1 {
             margin: auto;
+            text-align: center;
         }
 
         .add-to-cart {
@@ -118,7 +129,49 @@ include 'db.php';
             box-shadow: 0 5px 15px rgba(11, 70, 70, 0.4);
         }
 
-        .back-button {
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 12px 20px;
+            width: 350px;
+            border: 2px solid #333;
+            border-radius: 25px 0 0 25px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 12px 20px;
+            background-color: #0b4646;
+            color: white;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .search-bar button:hover {
+            background-color: #093a3a;
+        }
+
+        .cart-icon {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: white;
+            font-size: 22px;
+            text-decoration: none;
+        }
+
+        .cart-icon:hover {
+            text-decoration: underline;
+        }
+
+        .admin-back {
             position: fixed;
             top: 20px;
             left: 20px;
@@ -135,26 +188,29 @@ include 'db.php';
 </head>
 
 <body>
-
-    <?php if (isset($_SESSION['admin'])): ?>
-        <a href="admin_dashboard.php" class="back-button">⬅ Back to Dashboard</a>
-    <?php endif; ?>
-
     <nav>
         <a href="index.html">Home</a>
         <a href="products.php">Products</a>
-        <a href="cart.html">Cart</a>
+        <a href="cart.php" class="cart-icon">🛒</a>
         <a href="signup.html">Sign Up</a>
         <a href="login.html">Login</a>
     </nav>
 
+    <?php if (isset($_SESSION['admin'])): ?>
+        <a href="admin_dashboard.php" class="admin-back">⬅ Back to Dashboard</a>
+    <?php endif; ?>
+
     <h1>Our Handmade Products</h1>
+
+    <div class="search-bar">
+        <form method="GET" action="products.php">
+            <input type="text" name="search" placeholder="Search products..." value="<?php echo htmlspecialchars($search); ?>">
+            <button type="submit">Search</button>
+        </form>
+    </div>
 
     <div class="products-container">
         <?php
-        $sql = "SELECT * FROM products";
-        $result = mysqli_query($conn, $sql);
-
         while ($row = mysqli_fetch_assoc($result)) {
             echo '
             <div class="product-card">
@@ -162,15 +218,15 @@ include 'db.php';
                 <h3>' . htmlspecialchars($row['name']) . '</h3>
                 <p>' . htmlspecialchars($row['price']) . ' ৳</p>';
 
-            // Prevent Add to Cart for Admin
-            if (isset($_SESSION['admin'])) {
-                echo '<button class="add-to-cart" disabled style="background-color: gray; cursor: not-allowed;">Admin Cannot Add</button>';
-            } else {
+            // Admin cannot add to cart
+            if (!isset($_SESSION['admin'])) {
                 echo '
                 <form action="add_to_cart.php" method="POST">
                     <input type="hidden" name="product_id" value="' . $row['id'] . '">
                     <button type="submit" class="add-to-cart">Add to Cart</button>
                 </form>';
+            } else {
+                echo '<p style="color:red; font-weight:bold;">(Admin cannot add to cart)</p>';
             }
 
             echo '</div>';
