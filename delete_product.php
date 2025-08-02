@@ -24,5 +24,9 @@ if ($product && file_exists('images/' . $product['image'])) {
 // Delete product from database
 mysqli_query($conn, "DELETE FROM products WHERE id=$id");
 
-header("Location: manage_products.php?deleted=success");
+// ✅ Redirect after update
+echo "<script>
+    alert('✅ Product updated successfully!');
+    window.location.href = 'admin_dashboard.php';
+</script>";
 exit;

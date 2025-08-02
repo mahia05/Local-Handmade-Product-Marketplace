@@ -99,7 +99,11 @@
             $stmt->bind_param("sds", $name, $price, $image);
             $stmt->execute();
 
-            header("Location: admin_dashboard.php?added=success");
+            // ✅ Redirect after update
+            echo "<script>
+              alert('✅ Product updated successfully!');
+             window.location.href = 'admin_dashboard.php';
+           </script>";
             exit;
         } else {
             $message = "❌ Failed to upload image.";

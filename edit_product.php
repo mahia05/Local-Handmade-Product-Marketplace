@@ -48,7 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $stmt->execute();
-    header("Location: manage_products.php?updated=success");
+    // ✅ Redirect after update
+    echo "<script>
+    alert('✅ Product updated successfully!');
+    window.location.href = 'admin_dashboard.php';
+</script>";
     exit;
 }
 
