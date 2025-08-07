@@ -36,7 +36,7 @@ if ($product_id > 0) {
     // ✅ Optional: Validate product ID exists in DB
     $check = mysqli_query($conn, "SELECT id FROM products WHERE id = $product_id");
     if (mysqli_num_rows($check) == 0) {
-        echo "⚠️ Product not found.";
+        echo "⚠ Product not found.";
         exit();
     }
 
@@ -53,5 +53,5 @@ if ($product_id > 0) {
     header('Location: cart.php');
     exit();
 } else {
-    echo "⚠️ Invalid product or missing ID.";
+    echo "⚠ Invalid product or missing ID.";
 }
